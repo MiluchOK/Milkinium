@@ -11,8 +11,9 @@ class App extends Component {
   
   componentDidMount() {
     axios.get('/api/hello')
-    .then(res => {
-      this.setState({response: 'res'})
+    .then((res) => {
+      // console.log(`Got response: ${res.data.express}`)
+      this.setState({response: res.data.express})
     })
   }
   
@@ -20,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <p>Stuff</p>
-        <p>{this.state.response}</p>
+        <p>Your response: {this.state.response}</p>
       </div>
     );
   }
