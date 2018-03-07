@@ -1,12 +1,13 @@
 const express = require('express');
-var mongoose   = require('mongoose');
+const mongoose   = require('mongoose');
+const morgan = require('morgan')
 const routes = require('./server/routes');
-const db = require('server/config/db');
+const config = require('./server/config');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-mongoose.connect(db.db);
+mongoose.connect(config.db_host)
 .then(() => {
   console.log("Connected to the db.")
 })
@@ -14,6 +15,9 @@ mongoose.connect(db.db);
   console.log("Error connecting to db: " + err);
 })
 
+mongoose.Promise = require('bluebird');
+
+app.use(morgan('tiny'))
 app.use('/', routes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
