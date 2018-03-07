@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose   = require('mongoose');
-const morgan = require('morgan')
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const routes = require('./server/routes');
 const config = require('./server/config');
+const errorHandler = require('./server/middleware/errorHandler');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,7 +19,8 @@ mongoose.connect(config.db_host)
 
 mongoose.Promise = require('bluebird');
 
-app.use(morgan('tiny'))
+app.use(bodyParser.json());
+app.use(morgan('tiny'));
 app.use('/', routes);
-
+app.use(errorHandler);
 app.listen(port, () => console.log(`Listening on port ${port}`));

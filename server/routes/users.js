@@ -6,34 +6,47 @@ const logger = require('../logger')('users');
 
 routes.use(auth);
 
-routes.get('/', (req, res) => {
+routes.get('/', (req, res, next) => {
   logger('info', 'Getting users.');
-  res.status(200).json({ message: 'Returning all users' });
-});
-
-routes.get('/:userId', (req, res) => {
-  logger('info', `Getting a users with id ${req.params.userId}`);
-  res.status(200).json({message: 'Returning a user'})
-})
-
-routes.post('/', (req, res) => {
-  logger('info', `Creating a user.`);
-  let user = new User();
-  user.first_name = "Alexey";
-  user.last_name = "Milyukov";
-  user.save()
-    .then(() => {
-      logger("info", "User is created");
+  const users = User.find({});
+  users
+    .then((data) => {
+      res.status(200).json(data);
     })
     .catch((err) => {
-      logger('error', err);
+      next(err);
     })
-  res.status(201).json({message: 'User created'})
+});
+
+routes.get('/:userId', (req, res, next) => {
+  const id = req.params.userId;
+  logger('info', `Getting a users with id ${id}`);
+  const user = User.findById(id);
+  user
+    .then((data) => {
+      res.status(200).json(data)
+    })
+    .catch((err) => {
+      next(err);
+    })
 })
 
-routes.put('/:userId', (req, res) => {
+routes.post('/', (req, res, next) => {
+  logger('info', `Creating a user with ${req.body}`);
+  let user = new User(req.body);
+  user.save()
+    .then((data) => {
+      logger("info", `User is created ${data}`);
+      res.status(200).json(data)
+    })
+    .catch((err) => {
+      next(err);
+    })
+})
+
+routes.put('/:userId', (req, res, next) => {
   logger('info', `Updating a user with id ${userId}.`);
-  res.status(200),json({message: 'Updating a user'})
+  res.status(200).json({message: 'Updating a user'})
 })
 
 module.exports = routes;
