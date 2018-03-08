@@ -1,6 +1,5 @@
 const routes = require('express').Router();
 const auth = require('../middleware/authorization');
-const User = require('../models/user');
 const logger = require('../logger')('users_route');
 const usersController = require('../controllers/users');
 
