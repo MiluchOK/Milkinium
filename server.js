@@ -15,7 +15,7 @@ mongoose.connect(config.db_host)
 })
 .catch((err) => {
   console.log("Error connecting to db: " + err);
-})
+});
 
 mongoose.Promise = require('bluebird');
 
