@@ -4,7 +4,7 @@ const config = require('../config');
 const loggerConfig = config.logger;
 
 if (loggerConfig.appenders) {
-  log4js.configure(({ appenders } = loggerConfig));
+  // log4js.configure(({ appenders } = loggerConfig));
 }
 
 module.exports = module => {
