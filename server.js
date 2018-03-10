@@ -27,3 +27,5 @@ app.use(jwt({secret: process.env.JWT_SECRET}));
 app.use('/', routes);
 app.use(errorHandler);
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;
