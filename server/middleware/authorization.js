@@ -1,6 +1,10 @@
-const authorized = (req, res, next) => {
-  console.log("Authorizing...");
-  next();
+const logger = require('../logger')('auth_middleware');
+
+module.exports = (req, res, next) => {
+    logger('debug', 'Checking for authorization');
+
+    next();
 };
 
-module.exports = authorized;
+
+

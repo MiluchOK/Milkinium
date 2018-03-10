@@ -1,10 +1,8 @@
 const routes = require('express').Router();
-const auth = require('../middleware/authorization');
+const passport = require('passport');
 const logger = require('../logger')('users_route');
 const usersController = require('../controllers/users');
 
-
-routes.use(auth);
 
 routes.get('/', usersController.index);
 routes.post('/', usersController.create);
