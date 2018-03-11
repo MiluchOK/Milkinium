@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import {Switch, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
+import MainTest from './MainTest';
+import PageNotFound from './PageNotFound';
 
 class Main extends Component {
   
   render() {
     return (
       <div>
-        <p>Some stuff from main</p>
+        <Switch>
+          <Route path="/main_test" component={MainTest} />
+          <PageNotFound />
+        </Switch>
       </div>
     );
   }
