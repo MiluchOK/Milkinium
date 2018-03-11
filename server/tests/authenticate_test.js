@@ -1,6 +1,7 @@
 const request = require('supertest');
 const sleep = require('sleep');
 const chai = require('chai');
+const jwt = require('jsonwebtoken');
 const expect = chai.expect;
 const app = require('../../server');
 
@@ -40,7 +41,7 @@ describe('Authenticate', function() {
                 });
         });
 
-        it('should return a new JWT token', function(done) {
+        it.only('should return a new JWT token', function(done) {
 
             const user = {
                 email: "amilyukov@gmail.com",
@@ -56,7 +57,15 @@ describe('Authenticate', function() {
                 expect(token).to.not.equal(null);
                 expect(token).to.not.equal("");
                 expect(token).to.include('Bearer ');
-                done();
+                const secret = process.env.JWT_SECRET;
+                const pureToken = token.replace('Bearer ', '');
+                jwt.verify(pureToken, secret, function(err, decoded){
+                    if(err){
+                        done(err);
+                    }
+                    expect(decoded.data).to.have.all.keys('email', '_id', 'role', 'name');
+                    done();
+                });
             });
         });
     });

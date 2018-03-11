@@ -2,6 +2,7 @@
  * Created by amilyukov on 3/7/18.
  */
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 const logger = require('../logger')('auth_controller');
 const User = require('../models/users');
 
@@ -28,7 +29,8 @@ exports.issueToken = (req, res, next) => {
         .then((accepted) => {
             if(accepted === true){
                 logger('info', 'Issuing a new token for user ' + user);
-                let token = createToken(user);
+                const filteredUserData = _.pick(user, ['email', 'name', '_id', 'role']);
+                let token = createToken(filteredUserData);
                 logger('info', `A new token has been issued.`);
                 res.status(200).json({token: token});
             }
