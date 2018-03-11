@@ -6,6 +6,7 @@ const routes = require('./server/routes');
 const config = require('./server/config');
 const errorHandler = require('./server/middleware/errorHandler');
 const jwt = require('express-jwt');
+require('dotenv').config();
 // const authorization = require('./server/middleware/authorization');
 
 
@@ -26,6 +27,8 @@ app.use(morgan('tiny'));
 app.use(jwt({secret: process.env.JWT_SECRET}));
 app.use('/', routes);
 app.use(errorHandler);
+
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 module.exports = app;
