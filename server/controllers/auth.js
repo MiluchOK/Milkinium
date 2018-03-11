@@ -10,7 +10,7 @@ createToken = (data) => {
     const secret = process.env.JWT_SECRET;
     return ('Bearer ' + jwt.sign({
         data: data
-    }, secret, { expiresIn: '1h' }));
+    }, secret, {expiresIn: '1h'}));
 };
 
 exports.issueToken = (req, res, next) => {
@@ -19,29 +19,29 @@ exports.issueToken = (req, res, next) => {
     const user = User.findOne({email: email}).exec();
 
     user
-    .then((user) => {
-        if(user === null){
-            logger('warn', 'User could not be found.');
-            return res.status(404).json({error: `User with email ${email} could not be found.`});
-        }
+        .then((user) => {
+            if (user === null) {
+                logger('warn', 'User could not be found.');
+                return res.status(404).json({error: `User with email ${email} could not be found.`});
+            }
 
-        user.comparePassword(password)
-        .then((accepted) => {
-            if(accepted === true){
-                logger('info', 'Issuing a new token for user ' + user);
-                const filteredUserData = _.pick(user, ['email', 'name', '_id', 'role']);
-                let token = createToken(filteredUserData);
-                logger('info', `A new token has been issued.`);
-                res.status(200).json({token: token});
-            }
-            else{
-                res.status(401).json({error: 'Unauthorized'});
-            }
+            user.comparePassword(password)
+                .then((accepted) => {
+                    if (accepted === true) {
+                        logger('info', 'Issuing a new token for user ' + user);
+                        const filteredUserData = _.pick(user, ['email', 'name', '_id', 'role']);
+                        let token = createToken(filteredUserData);
+                        logger('info', `A new token has been issued.`);
+                        res.status(200).json({token: token});
+                    }
+                    else {
+                        res.status(401).json({error: 'Unauthorized'});
+                    }
+                });
+        })
+        .catch((err) => {
+            next(err);
         });
-    })
-    .catch((err) => {
-        next(err);
-    });
 };
 
 exports.refreshToken = (req, res) => {
