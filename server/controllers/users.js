@@ -35,7 +35,7 @@ exports.create = (req, res, next) => {
   user.save()
     .then((data) => {
       logger("info", `User is created ${data}`);
-      res.status(200).json(data)
+      res.status(201).json(data)
     })
     .catch((err) => {
       next(err);
@@ -48,5 +48,14 @@ exports.update = (req, res, next) => {
 }
 
 exports.destroy = (req, res, next) => {
-  res.status(200).json({message: 'Not implemmented'})
+    const id = req.params.userId;
+    logger('info', `Removing a users with id ${id}`);
+    User.findById(id).remove().exec()
+    .then(() => {
+      logger('warn', `Deleted user by id ${id}`);
+      res.status(200).json({message: 'Deleted'})
+    })
+    .catch((err) => {
+      next(err);
+    })
 }

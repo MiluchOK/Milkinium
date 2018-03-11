@@ -7,13 +7,14 @@ const User = require('../models/users');
 
 createToken = (data) => {
     const secret = process.env.JWT_SECRET;
-    return (jwt.sign({
+    return ('Bearer ' + jwt.sign({
         data: data
     }, secret, { expiresIn: '1h' }));
 };
 
 exports.issueToken = (req, res, next) => {
-    email = req.body.email;
+    const email = req.body.email;
+    const password = req.body.password;
     const user = User.findOne({email: email}).exec();
 
     user
@@ -23,10 +24,18 @@ exports.issueToken = (req, res, next) => {
             return res.status(404).json({error: `User with email ${email} could not be found.`});
         }
 
-        logger('info', 'Issuing a new token for user ' + user);
-        let token = createToken(user);
-        logger('info', `A new token has been issued.`);
-        res.status(200).json({token: token});
+        user.comparePassword(password)
+        .then((accepted) => {
+            if(accepted === true){
+                logger('info', 'Issuing a new token for user ' + user);
+                let token = createToken(user);
+                logger('info', `A new token has been issued.`);
+                res.status(200).json({token: token});
+            }
+            else{
+                res.status(401).json({error: 'Unauthorized'});
+            }
+        });
     })
     .catch((err) => {
         next(err);

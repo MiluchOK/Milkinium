@@ -8,5 +8,6 @@ routes.get('/', usersController.index);
 routes.post('/', usersController.create);
 routes.get('/:userId', usersController.show);
 routes.put('/:userId', usersController.update);
+routes.delete('/:userId', usersController.destroy);
 
 module.exports = routes;

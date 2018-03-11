@@ -1,5 +1,5 @@
 //Users model
-
+const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
@@ -59,10 +59,19 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
+UserSchema.methods.comparePassword = function(candidatePassword) {
+    const selfPassword = this.password;
+    logger('debug', `Comparing password: ${candidatePassword} and hash ${this.password}`);
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(candidatePassword, selfPassword)
+            .then((res) => {
+                logger('debug', 'Resolving password compare with ' + res);
+                resolve(res);
+            })
+            .catch((err) => {
+                logger('debug', `Error comparing passwords. ${err}`);
+                reject(err);
+            })
     });
 };
 
