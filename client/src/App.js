@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Login from './containers/Login';
+import Onboarding from './containers/onboarding';
 import axios from 'axios';
 import './App.css';
 import Main from './containers/Main';
@@ -11,7 +11,9 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route path="/login" component={Login} />
+            {["/signin", "/signup"].map(path =>
+                <Route path={path} component={Onboarding} />
+            )}
           <Main />
         </Switch>
       </div>
