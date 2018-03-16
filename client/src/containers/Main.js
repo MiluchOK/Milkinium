@@ -5,12 +5,12 @@ import MainTest from './MainTest';
 import PageNotFound from './PageNotFound';
 
 class Main extends Component {
-  
+
   render() {
     return (
       <div>
         <Switch>
-          <Route path="/main_test" component={MainTest} />
+          <Route path="/dashboard" component={MainTest} />
           <PageNotFound />
         </Switch>
       </div>
