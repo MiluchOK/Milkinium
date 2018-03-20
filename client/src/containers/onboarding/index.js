@@ -9,11 +9,11 @@ class Onboarding extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path="/login" component={Login} />
+                    <Route path="/signIn" component={Login} />
                 </Switch>
             </div>
         );
     }
 }
 
-export default Login;
+export default Onboarding;
