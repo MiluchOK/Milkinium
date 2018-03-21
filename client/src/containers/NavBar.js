@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import AppBar from '../components/AppBar';
 
 const drawerWidth = 240;
 
@@ -24,28 +20,6 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
   },
   drawerPaper: {
     position: 'relative',
@@ -98,24 +72,32 @@ class NavBar extends React.Component {
 
     return (
       <div className={classes.root}>
+
+
+        {/*<AppBar*/}
+          {/*position="absolute"*/}
+          {/*className={classNames(classes.appBar, this.state.open && classes.appBarShift)}*/}
+        {/*>*/}
+          {/*<Toolbar disableGutters={!this.state.open}>*/}
+            {/*<IconButton*/}
+              {/*color="inherit"*/}
+              {/*aria-label="open drawer"*/}
+              {/*onClick={this.handleDrawerOpen}*/}
+              {/*className={classNames(classes.menuButton, this.state.open && classes.hide)}*/}
+            {/*>*/}
+              {/*<MenuIcon />*/}
+            {/*</IconButton>*/}
+            {/*<Typography variant="title" color="inherit" noWrap>*/}
+              {/*Milkinium*/}
+            {/*</Typography>*/}
+          {/*</Toolbar>*/}
+        {/*</AppBar>*/}
+
         <AppBar
-          position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-        >
-          <Toolbar disableGutters={!this.state.open}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, this.state.open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Milkinium
-            </Typography>
-          </Toolbar>
-        </AppBar>
+            open={this.state.open}
+            handleDrawerOpen={this.handleDrawerOpen}
+        />
+
 
         <Drawer
           variant="permanent"
@@ -129,20 +111,23 @@ class NavBar extends React.Component {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
+
           <List component="nav">
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Drafts" />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemIcon>
+                <DraftsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Drafts" />
+            </ListItem>
           </List>
+
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
