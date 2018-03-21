@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
-import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
 import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
@@ -10,6 +9,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import AppBar from '../components/AppBar';
+import Drawer from '../components/Drawer';
 
 const drawerWidth = 240;
 
@@ -20,25 +20,6 @@ const styles = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-  },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
-    },
   },
   toolbar: {
     display: 'flex',
@@ -68,67 +49,20 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-
-
-        {/*<AppBar*/}
-          {/*position="absolute"*/}
-          {/*className={classNames(classes.appBar, this.state.open && classes.appBarShift)}*/}
-        {/*>*/}
-          {/*<Toolbar disableGutters={!this.state.open}>*/}
-            {/*<IconButton*/}
-              {/*color="inherit"*/}
-              {/*aria-label="open drawer"*/}
-              {/*onClick={this.handleDrawerOpen}*/}
-              {/*className={classNames(classes.menuButton, this.state.open && classes.hide)}*/}
-            {/*>*/}
-              {/*<MenuIcon />*/}
-            {/*</IconButton>*/}
-            {/*<Typography variant="title" color="inherit" noWrap>*/}
-              {/*Milkinium*/}
-            {/*</Typography>*/}
-          {/*</Toolbar>*/}
-        {/*</AppBar>*/}
-
         <AppBar
             open={this.state.open}
             handleDrawerOpen={this.handleDrawerOpen}
         />
 
-
         <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
+            open={this.state.open}
+            handleDrawerClose={this.handleDrawerClose}
+        />
 
-          <List component="nav">
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inbox" />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Drafts" />
-            </ListItem>
-          </List>
-
-        </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {this.props.children}
@@ -140,7 +74,6 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(NavBar);
