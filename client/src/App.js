@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Login from './screens/Login';
-import Dashboard from './screens/Dashboard';
-import Executions from './screens/Executions';
 import NavBar from './containers/NavBar';
 import PageNotFound from './screens/PageNotFound';
+import Dashboard from './screens/Dashboard';
+import Executions from './screens/Executions';
+import Feed from './screens/Feed';
+
+
 import './App.css';
 
 class App extends Component {
@@ -13,12 +15,10 @@ class App extends Component {
     return (
         <div className="App">
           <Switch>
-            <Route path='/signin' exact component={Login}/>
-            <NavBar>
-              <Route path='/' exact component={Dashboard}/>
-              <Route path="/executions" exact component={Executions} />
-            </NavBar>
-            <PageNotFound />
+            <Route path="/" exact component={Dashboard}/>
+            <Route path="/executions" exact component={Executions} />
+            <Route path="/feed" exact component={Feed} />
+            <Route component={PageNotFound}/>
           </Switch>
         </div>
     );

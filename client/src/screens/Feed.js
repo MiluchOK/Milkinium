@@ -3,15 +3,15 @@ import {Switch, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-class Dashboard extends Component {
+class Feed extends Component {
 
   render() {
     return (
-      <div>
-        Dashboard stuff
-      </div>
+        <div>
+          Feed here
+        </div>
     );
   }
 }
 
-export default Dashboard;
+export default Feed;
