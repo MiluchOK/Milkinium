@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import InboxIcon from 'material-ui-icons/Inbox';
+import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import {Link} from 'react-router-dom'
 
 class DrawerItem extends Component {
 
     render() {
         return (
-            <ListItem button>
-                <ListItemIcon>
-                    <InboxIcon />
-                    {/*{this.props.icon}*/}
-                </ListItemIcon>
-                <ListItemText primary={this.props.text} />
-            </ListItem>
+            <Link to={this.props.path}>
+                <ListItem button>
+                    <ListItemIcon>
+                        {this.props.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={this.props.text}/>
+                </ListItem>
+            </Link>
         );
     }
 }

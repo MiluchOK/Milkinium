@@ -3,8 +3,9 @@ import { withStyles } from 'material-ui/styles';
 import MatUIDrawer from 'material-ui/Drawer';
 import classNames from 'classnames';
 import IconButton from 'material-ui/IconButton';
-import InboxIcon from 'material-ui-icons/Inbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
+import FeedIcon from 'material-ui-icons/RssFeed';
+import DashboardIcon from 'material-ui-icons/Dashboard';
+import ListIcon from 'material-ui-icons/List';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -44,19 +45,19 @@ const styles = theme => ({
 
 const navigations = [
     {
-        name: 'dashboard',
+        name: 'Dashboard',
         path: '/',
-        icon: InboxIcon
+        icon: (<DashboardIcon/>)
     },
     {
-        name: 'executions',
-        path: '/execution',
-        icon: InboxIcon
+        name: 'Executions',
+        path: '/executions',
+        icon: (<ListIcon/>)
     },
     {
-        name: 'feed',
+        name: 'Feed',
         path: '/feed',
-        icon: InboxIcon
+        icon: (<FeedIcon/>)
     }
 ];
 
@@ -87,6 +88,7 @@ class Drawer extends Component {
                             key={nav.name}
                             text={nav.name}
                             icon={nav.icon}
+                            path={nav.path}
                         />
                     ))}
                 </List>
