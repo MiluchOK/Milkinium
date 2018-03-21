@@ -11,18 +11,21 @@ import './App.css';
 
 class App extends Component {
 
-  render() {
-    return (
-        <div className="App">
-          <Switch>
-            <Route path="/" exact component={Dashboard}/>
-            <Route path="/executions" exact component={Executions} />
-            <Route path="/feed" exact component={Feed} />
-            <Route component={PageNotFound}/>
-          </Switch>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <NavBar>
+                    <Switch>
+                        <Route path="/" exact component={Dashboard}/>
+                        <Route path="/executions" exact component={Executions}/>
+                        <Route path="/feed" exact component={Feed}/>
+                        {/*TODO Fix 404 rendering with NavBar*/}
+                        <Route component={PageNotFound}/>
+                    </Switch>
+                </NavBar>
+            </div>
+        );
+    }
 }
 
 export default App;

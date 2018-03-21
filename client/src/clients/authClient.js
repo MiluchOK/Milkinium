@@ -1,5 +1,6 @@
 class AuthClient {
   isAuthenticated() {
+    console.log("Checking auth");
     return localStorage.getItem('token');
   }
 
