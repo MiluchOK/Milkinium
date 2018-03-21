@@ -112,7 +112,7 @@ class NavBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              Mini variant drawer
+              Milkinium
             </Typography>
           </Toolbar>
         </AppBar>
