@@ -1,24 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Onboarding from './containers/onboarding';
-import axios from 'axios';
+import Dashboard from './screens/Dashboard';
+import PageNotFound from './screens/PageNotFound';
 import './App.css';
-import Main from './screens/Main';
-import routes from './routes/routes';
 
 class App extends Component {
 
   render() {
-    const r = routes.onboarding;
     return (
-      <div className="App">
-        <Switch>
-            {r.map(path =>
-                <Route path={path} component={Onboarding} />
-            )}
-          <Main />
-        </Switch>
-      </div>
+        <div className="App">
+          <Switch>
+            <Route path='/signin' exact component={Onboarding}/>
+            <Route path='/' exact component={Dashboard}/>
+            <PageNotFound />
+          </Switch>
+        </div>
     );
   }
 }
