@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Toolbar from 'material-ui/Toolbar';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
+import {Link} from 'react-router-dom'
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -69,11 +70,13 @@ class AppBar extends Component {
                     <Typography variant="title" color="inherit" noWrap className={classes.projectName}>
                         Milkinium
                     </Typography>
-                    <Avatar
-                        alt="Adelle Charles"
-                        src="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
-                        className={classNames(classes.avatar)}
-                    />
+                    <Link to="/profile">
+                        <Avatar
+                            alt="Adelle Charles"
+                            src="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
+                            className={classNames(classes.avatar)}
+                        />
+                    </Link>
                 </Toolbar>
             </MatUIAppBar>
         );
