@@ -50,3 +50,7 @@ exports.refreshToken = (req, res) => {
     let token = createToken(data);
     res.status(200).json({token: token});
 };
+
+exports.whoAmI = (req, res) => {
+    res.status(200).json(req.user.data);
+};

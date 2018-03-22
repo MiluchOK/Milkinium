@@ -1,17 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import classNames from 'classnames';
-import IconButton from 'material-ui/IconButton';
-import InboxIcon from 'material-ui-icons/Inbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
-import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import AppBar from '../components/AppBar';
 import Drawer from '../components/Drawer';
-
-const drawerWidth = 240;
 
 const styles = theme => ({
   root: {

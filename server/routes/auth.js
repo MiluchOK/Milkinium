@@ -6,5 +6,6 @@ const authValidator = require('../validators/auth');
 
 routes.post('/authenticate', validate(authValidator.authenticate), authController.issueToken);
 routes.get('/authenticate', authController.refreshToken);
+routes.get('/whoami', authController.whoAmI);
 
 module.exports = routes;
