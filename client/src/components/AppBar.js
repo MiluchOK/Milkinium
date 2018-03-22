@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Toolbar from 'material-ui/Toolbar';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
+import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
 
@@ -13,6 +14,7 @@ const drawerWidth = 240;
 const styles = theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
+        flexGrow: 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -33,6 +35,15 @@ const styles = theme => ({
         marginLeft: 12,
         marginRight: 36,
     },
+    avatar: {
+        width: 40,
+        height: 40,
+        justifyContent: 'flex-end',
+        marginRight: 20
+    },
+    projectName: {
+        flex: 1
+    }
 });
 
 class AppBar extends Component {
@@ -55,9 +66,14 @@ class AppBar extends Component {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="title" color="inherit" noWrap>
+                    <Typography variant="title" color="inherit" noWrap className={classes.projectName}>
                         Milkinium
                     </Typography>
+                    <Avatar
+                        alt="Adelle Charles"
+                        src="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
+                        className={classNames(classes.avatar)}
+                    />
                 </Toolbar>
             </MatUIAppBar>
         );

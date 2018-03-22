@@ -43,6 +43,7 @@ const styles = theme => ({
 });
 
 
+//TODO move to common routes
 const navigations = [
     {
         name: 'Dashboard',
