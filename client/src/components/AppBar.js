@@ -73,7 +73,7 @@ class AppBar extends Component {
                     <Link to="/profile">
                         <Avatar
                             alt="Adelle Charles"
-                            src="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
+                            src={this.props.avatarImage}
                             className={classNames(classes.avatar)}
                         />
                     </Link>
@@ -84,7 +84,8 @@ class AppBar extends Component {
 }
 
 AppBar.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    avatarImage: PropTypes.string.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(AppBar);

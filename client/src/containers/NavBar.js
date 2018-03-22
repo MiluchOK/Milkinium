@@ -56,6 +56,7 @@ class NavBar extends React.Component {
         <AppBar
             open={this.state.open}
             handleDrawerOpen={this.handleDrawerOpen}
+            avatarImage="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
         />
 
         <Drawer
