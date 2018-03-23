@@ -1,3 +1,5 @@
+import httpClient from './httpClient';
+
 class AuthClient {
   isAuthenticated() {
     // TODO Actually check the token
@@ -6,6 +8,8 @@ class AuthClient {
 
   saveToken(token) {
     localStorage.setItem('token', token);
+    //TODO Find a better place for this call
+    return httpClient.get('/whoAmI');
   }
 
   getToken() {

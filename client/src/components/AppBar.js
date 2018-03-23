@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom'
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
+import CornerMenu from './CornerMenu';
 
 const drawerWidth = 240;
 
@@ -49,6 +50,19 @@ const styles = theme => ({
 
 class AppBar extends Component {
 
+    state = {
+        anchorEl: null,
+    };
+
+    handleClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        console.log("Closing");
+        this.setState({ anchorEl: null });
+    };
+
     render() {
 
         const { classes } = this.props;
@@ -70,13 +84,16 @@ class AppBar extends Component {
                     <Typography variant="title" color="inherit" noWrap className={classes.projectName}>
                         Milkinium
                     </Typography>
-                    <Link to="/profile">
-                        <Avatar
-                            alt="Adelle Charles"
-                            src={this.props.avatarImage}
-                            className={classNames(classes.avatar)}
-                        />
-                    </Link>
+                    <Avatar
+                        alt="Adelle Charles"
+                        src={this.props.avatarImage}
+                        className={classNames(classes.avatar)}
+                        onClick={this.handleClick}
+                    />
+                    <CornerMenu
+                        anchorEl={this.state.anchorEl}
+                        handleClose={this.handleClose}
+                    />
                 </Toolbar>
             </MatUIAppBar>
         );
