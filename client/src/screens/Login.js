@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import LoginForm from '../components/LoginForm';
-import { signIn } from '../redux/actions/usersActions';
+import { signIn, getCurrentUser} from '../redux/actions/usersActions';
 
 class Login extends Component {
 
@@ -16,7 +16,10 @@ class Login extends Component {
     .then((res) => {
         console.log(res);
         this.props.history.push('/')
-    });
+    })
+    .then(() => {
+        this.props.getCurrentUser();
+    })
   }
 
     render() {
@@ -30,8 +33,10 @@ class Login extends Component {
 }
 
 function matchDispatchToProps(dispatch){
-  return bindActionCreators({signIn: signIn}, dispatch)
+  return bindActionCreators({
+      signIn: signIn,
+      getCurrentUser: getCurrentUser
+  }, dispatch)
 }
-
 
 export default connect(null, matchDispatchToProps)(Login);

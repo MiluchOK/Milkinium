@@ -15,4 +15,8 @@ export const signIn = ({email, password}) => {
     type: actionTypes.SIGN_IN,
     payload: httpClient.post('/authenticate', {email, password})//.then((res) => res.data)
   }
-}
+};
+
+export const getCurrentUser = ({}) => {
+
+};
