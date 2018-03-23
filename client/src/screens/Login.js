@@ -13,7 +13,10 @@ class Login extends Component {
 
   handleSignIn(values){
     this.props.signIn(values)
-    .then((res) => {this.props.history.push('/')});
+    .then((res) => {
+        console.log(res);
+        this.props.history.push('/')
+    });
   }
 
     render() {
