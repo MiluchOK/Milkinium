@@ -1,3 +1,7 @@
+import { Map, List, fromJS } from 'immutable';
+
 export default {
-  projects: []
+  projects: List(),
+  users: List(),
+  current_user: Map(),
 };

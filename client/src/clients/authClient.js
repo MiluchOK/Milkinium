@@ -16,6 +16,17 @@ class AuthClient {
     return localStorage.getItem('token');
   }
 
+  getUserData() {
+    //Decode the token
+      return {
+        name: {
+          first: "Alex",
+          last: "Milk"
+        },
+        email: "amilyukov@gmail.com"
+      }
+  }
+
   logOut() {
     return new Promise((res) => {
       localStorage.removeItem('token');
