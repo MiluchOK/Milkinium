@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import AppBar from '../components/AppBar';
 import Drawer from '../components/Drawer';
@@ -48,7 +50,7 @@ class NavBar extends React.Component {
         <AppBar
             open={this.state.open}
             handleDrawerOpen={this.handleDrawerOpen}
-            avatarImage="https://cdn.business2community.com/wp-content/uploads/2012/11/twitter-small-business-marketing.jpe"
+            avatarImage={this.props.current_user.avatar || "https://t4.ftcdn.net/jpg/00/78/73/53/240_F_78735333_o3qJe4bT5ciwldLIjVDulFKrDAV3jGYO.jpg"}
         />
 
         <Drawer
@@ -69,4 +71,13 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(NavBar);
+const mapStateToProps = (state) => {
+  return {current_user: state.current_user}
+};
+
+export default compose(
+    withStyles(styles, { withTheme: true }),
+    connect(mapStateToProps)
+)(NavBar);
+
+// export default (NavBar);
