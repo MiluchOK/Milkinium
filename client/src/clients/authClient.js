@@ -1,9 +1,13 @@
 import httpClient from './httpClient';
 
+const retrieveToken = () => {
+  return localStorage.getItem('token');
+};
+
 class AuthClient {
   isAuthenticated() {
     // TODO Actually check the token
-    return localStorage.getItem('token');
+    return retrieveToken();
   }
 
   saveToken(token) {
@@ -13,18 +17,24 @@ class AuthClient {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return retrieveToken();
   }
 
   getUserData() {
     //Decode the token
-      return {
-        name: {
-          first: "Alex",
-          last: "Milk"
-        },
-        email: "amilyukov@gmail.com"
-      }
+      const token = retrieveToken();
+      let base64Url = token.split('.')[1];
+      let base64 = base64Url.replace('-', '+').replace('_', '/');
+      const data =  JSON.parse(window.atob(base64));
+      console.log("Got token data: " + Object.keys(data.data));
+      return data.data;
+      // return {
+      //   name: {
+      //     first: "Alex",
+      //     last: "Milk"
+      //   },
+      //   email: "amilyukov@gmail.com"
+      // }
   }
 
   logOut() {

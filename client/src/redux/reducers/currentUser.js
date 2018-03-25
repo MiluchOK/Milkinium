@@ -7,7 +7,7 @@ export default function stuff(state = initialState.current_user, action) {
         case actionTypes.GET_CURRENT_USER:
             //TODO Need refactoring, it is bad, but who cares are the moment
             return Map({
-                name: action.payload.name.first + action.payload.name.last,
+                name: action.payload.name.first + " " + action.payload.name.last,
                 email: action.payload.email,
                 avatar: action.payload.avatar
             });
