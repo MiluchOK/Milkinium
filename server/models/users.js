@@ -9,47 +9,50 @@ const SALT_WORK_FACTOR = 10;
 
 
 const UserSchema = Schema({
-  name: {
-    type: nameSchema,
-    required: true
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    // unique: true,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  role: {
-    type: String,
-    enum: ['Admin', 'Client'],
-    default: 'Client'
-  }
+    name: {
+        type: nameSchema,
+        required: true
+    },
+    email: {
+        type: String,
+        lowercase: true,
+        // unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    avatar: {
+        type: String
+    },
+    role: {
+        type: String,
+        enum: ['Admin', 'Client'],
+        default: 'Client'
+    }
 });
 
 UserSchema.pre('save', (next) => {
-  let user = this;
-  logger('info', `Salting password for ${user}`);
+    let user = this;
+    logger('info', `Salting password for ${user}`);
 
-  return next();
+    return next();
 });
 
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     let user = this;
 
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
 
     // generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
         if (err) return next(err);
 
         // hash the password using our new salt
-        bcrypt.hash(user.password, salt, function(err, hash) {
+        bcrypt.hash(user.password, salt, function (err, hash) {
             if (err) return next(err);
 
             // override the cleartext password with the hashed one
@@ -59,7 +62,7 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword) {
+UserSchema.methods.comparePassword = function (candidatePassword) {
     const selfPassword = this.password;
     logger('debug', `Comparing password: ${candidatePassword} and hash ${this.password}`);
     return new Promise((resolve, reject) => {

@@ -29,7 +29,7 @@ exports.issueToken = (req, res, next) => {
                 .then((accepted) => {
                     if (accepted === true) {
                         logger('info', 'Issuing a new token for user ' + user);
-                        const filteredUserData = _.pick(user, ['email', 'name', '_id', 'role']);
+                        const filteredUserData = _.pick(user, ['email', 'name', '_id', 'role', 'avatar']);
                         let token = createToken(filteredUserData);
                         logger('info', `A new token has been issued.`);
                         res.status(200).json({token: token});

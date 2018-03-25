@@ -17,6 +17,7 @@
     "express": "^4.16.2",
     "express-jwt": "^5.3.1",
     "express-validation": "^1.0.2",
+    "immutable": "^3.8.2",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
     "log4js": "^2.5.3",
