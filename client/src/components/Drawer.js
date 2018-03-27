@@ -3,13 +3,11 @@ import { withStyles } from 'material-ui/styles';
 import MatUIDrawer from 'material-ui/Drawer';
 import classNames from 'classnames';
 import IconButton from 'material-ui/IconButton';
-import FeedIcon from 'material-ui-icons/RssFeed';
-import DashboardIcon from 'material-ui-icons/Dashboard';
-import ListIcon from 'material-ui-icons/List';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import DrawerItem from './DrawerItem';
+import NavBarRoutes from '../routes/navBarRoutes';
 
 const drawerWidth = 240;
 
@@ -43,26 +41,6 @@ const styles = theme => ({
 });
 
 
-//TODO move to common routes
-const navigations = [
-    {
-        name: 'Dashboard',
-        path: '/',
-        icon: (<DashboardIcon/>)
-    },
-    {
-        name: 'Executions',
-        path: '/executions',
-        icon: (<ListIcon/>)
-    },
-    {
-        name: 'Feed',
-        path: '/feed',
-        icon: (<FeedIcon/>)
-    }
-];
-
-
 class Drawer extends Component {
 
     render() {
@@ -84,7 +62,7 @@ class Drawer extends Component {
                 </div>
 
                 <List component="nav">
-                    {navigations.map((nav) => (
+                    {NavBarRoutes.map((nav) => (
                         <DrawerItem
                             key={nav.name}
                             text={nav.name}

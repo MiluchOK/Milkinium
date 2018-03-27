@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import NavBar from './containers/NavBar';
 import PageNotFound from './screens/PageNotFound';
-import Dashboard from './screens/Dashboard';
-import Executions from './screens/Executions';
+import NavBarRoutes from './routes/navBarRoutes';
 import Profile from './screens/Profile';
-import Feed from './screens/Feed';
 
 
 import './App.css';
@@ -17,9 +15,9 @@ class App extends Component {
             <div className="App">
                 <NavBar>
                     <Switch>
-                        <Route path="/" exact component={Dashboard}/>
-                        <Route path="/executions" exact component={Executions}/>
-                        <Route path="/feed" exact component={Feed}/>
+                        {NavBarRoutes.map((route) => (
+                            <Route path={route.path} exact component={route.component} />
+                        ))}
                         <Route path="/profile" exact component={Profile}/>
                         {/*TODO Fix 404 rendering with NavBar*/}
                         <Route component={PageNotFound}/>
