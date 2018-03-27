@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -60,7 +61,9 @@ class NavBar extends React.Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {this.props.children}
+          <Grid container>
+            {this.props.children}
+          </Grid>
         </main>
       </div>
     );
