@@ -40,7 +40,7 @@ exports.create = (req, res, next) => {
         .catch((err) => {
             next(err);
         })
-}
+};
 
 exports.update = (req, res, next) => {
     const userId = req.params.userId;

@@ -1,5 +1,4 @@
 const request = require('supertest');
-const createToken = require('../controllers/auth').createToken;
 const chai = require('chai');
 const jwt = require('jsonwebtoken');
 const expect = chai.expect;

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -5,9 +6,8 @@ const bodyParser = require('body-parser');
 const routes = require('./server/routes');
 const config = require('./server/config');
 const errorHandler = require('./server/middleware/errorHandler');
-const jwt = require('express-jwt');
+const auth = require('./server/middleware/authenticate');
 const logger = require('./server/logger')('server_log');
-require('dotenv').config();
 
 
 const app = express();
@@ -25,9 +25,13 @@ mongoose.connect(config.db_host)
 mongoose.Promise = require('bluebird');
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
-app.use(jwt({secret: process.env.JWT_SECRET}).unless({path: ['/authenticate']}));
+app.use((auth.authMid).unless({path: ['/authenticate']}));
 app.use('/', routes);
 app.use(errorHandler);
-app.listen(port, () => console.log(`Listening on port ${port}`));
 
-module.exports = app;
+if(process.env.NODE_ENV === 'test'){
+    module.exports = app;
+}
+else{
+    app.listen(port, () => console.log(`Listening on port ${port}`));
+}

@@ -1,8 +1,9 @@
+const jwt = require('express-jwt');
 const logger = require('../logger')('auth_middleware');
 
-module.exports = (req, res, next) => {
-    logger('debug', 'Checking for authenticate');
-    next();
+//Wrapping in a stupid object so it can be stabbed in the test
+module.exports = {
+    authMid: jwt({secret: process.env.JWT_SECRET})
 };
 
 
