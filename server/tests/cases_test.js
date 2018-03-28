@@ -2,8 +2,27 @@ const request = require('supertest');
 const uuidv4 = require('uuid/v4');
 const sleep = require('sleep');
 const chai = require('chai');
+const sinon = require('sinon');
 const expect = chai.expect;
-const app = require('../../server');
+
+let app;
+let auth;
+
+beforeEach(function() {
+    auth = require('../middleware/authenticate');
+    sinon.stub(auth, 'authMid')
+        .callsFake(function(req, res, next) {
+            return next();
+        });
+
+    // after you can create app:
+    app = require('../../server');
+});
+
+afterEach(function() {
+    // restore original method
+    auth.authMid.restore();
+});
 
 describe('Cases', function () {
     describe('create', function () {

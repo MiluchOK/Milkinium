@@ -21,7 +21,7 @@
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
     "log4js": "^2.5.3",
-    "mocha": "~3.5.3",
+    "mocha": "5.0.5",
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",

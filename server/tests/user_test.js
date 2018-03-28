@@ -3,9 +3,9 @@ const sleep = require('sleep');
 const chai = require('chai');
 const sinon = require('sinon');
 const expect = chai.expect;
+
 let app;
 let auth;
-
 
 beforeEach(function() {
     auth = require('../middleware/authenticate');
@@ -22,6 +22,7 @@ afterEach(function() {
     // restore original method
     auth.authMid.restore();
 });
+
 
 describe('User', function () {
     describe('create', function () {
