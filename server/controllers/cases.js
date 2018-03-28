@@ -30,6 +30,7 @@ exports.create = (req, res, next) => {
         res.status(201).json(data)
     })
     .catch((err) => {
+        logger("error", "Could not create a case: " + err);
         next(err);
     })
 };
