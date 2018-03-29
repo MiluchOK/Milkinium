@@ -5,40 +5,35 @@ const sleep = require('sleep');
 const chai = require('chai');
 const sinon = require('sinon');
 const expect = chai.expect;
-const server = require('../../server.js');
 
 let app;
-let s;
 let auth;
-
-beforeEach(function(done) {
-    auth = require('../middleware/authenticate');
-    sinon.stub(auth, 'authMid')
-        .callsFake(function(req, res, next) {
-            return next();
-        });
-
-    // after you can create app:
-    app = require('../app');
-    console.log("Got APP");
-    s = server.start(app, 9999);
-    console.log("Got server " + Object.keys(s));
-    done();
-});
-
-afterEach(function(done) {
-    // restore original method
-    auth.authMid.restore();
-    console.log("Closing the server");
-    s.close();
-    console.log("Closed the server");
-    done();
-});
 
 describe('Cases', function () {
     describe('create', function () {
+
+        beforeEach(function(done) {
+            auth = require('../middleware/authenticate');
+            sinon.stub(auth, 'authMid')
+                .callsFake(function(req, res, next) {
+                    return next();
+                });
+
+            // after you can create app:
+            app = require('../app');
+            console.log("Got APP");
+            done();
+        });
+
+        afterEach(function(done) {
+            // restore original method
+            auth.authMid.restore();
+            done();
+        });
+
         it('should create a case', function (done) {
 
+            this.timeout(50000);
             console.log("STARTING TEST");
             const random = uuidv4();
             const caseData = {
@@ -46,10 +41,12 @@ describe('Cases', function () {
                 internal_id: random
             };
 
+            console.log("Sending the request");
             request(app)
             .post('/cases')
             .send(caseData)
             .end((err, res) => {
+                console.log("Reached the end");
                 if (err) done(err);
                 console.log("FOOOOOOO");
                 expect(res.statusCode).to.equal(201);
