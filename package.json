@@ -6,7 +6,7 @@
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "test": "NODE_ENV=test mocha server/tests"
+    "test": "JWT_SECRET=foo NODE_ENV=test mocha server/tests"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
