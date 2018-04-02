@@ -1,6 +1,7 @@
 const routes = require('express').Router();
 const users = require('./users');
 const cases = require('./cases');
+const projects = require('./projects');
 const roots = require('./roots');
 const auth = require('./auth');
 const logger = require('../logger')('routes_index');
@@ -10,5 +11,6 @@ routes.use('/', roots);
 routes.use('/', auth);
 routes.use('/users', users);
 routes.use('/cases', cases);
+routes.use('/projects', projects);
 
 module.exports = routes;

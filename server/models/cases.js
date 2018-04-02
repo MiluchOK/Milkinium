@@ -10,6 +10,11 @@ const CaseSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+    },
+    project_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project',
+        required: true
     }
 });
 

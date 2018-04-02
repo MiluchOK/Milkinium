@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('./server/config');
 const logger = require('./server/logger')('server_log');
+const dbConnect = require('./server/db').dbConnect;
 
 const port = process.env.PORT || 5000;
 
@@ -14,15 +15,9 @@ const stop = (server) => {
     server.close();
 };
 
-const dbConnect = (config) => {
-    mongoose.Promise = require('bluebird');
-    return mongoose.connect(config.db_host);
-};
-
 module.exports = {
     start: start,
-    stop: stop,
-    dbConnect: dbConnect
+    stop: stop
 };
 
 if(process.env.NODE_ENV !== 'test'){
