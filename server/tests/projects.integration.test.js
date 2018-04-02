@@ -57,4 +57,16 @@ describe('Projects', function () {
                 done();
             })
     });
+
+    it.only('should get individual project', function(done) {
+        const id = '5ac1c7dc7be92c5176b2dad1';
+        request(app)
+            .get(`/projects/${id}`)
+            .end((err, res) => {
+            if(err) done(err);
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.name).to.equal('c22cc8b5-5a21-4c4e-b094-e2f78e1ff194');
+            done();
+        })
+    })
 });

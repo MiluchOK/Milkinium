@@ -1,6 +1,9 @@
 const Project = require('../models/projects');
 const logger = require('../logger')('projects_controller');
 
+const getProjectById = (cazeId) => {
+    return Project.findById(cazeId);
+};
 
 // GET list of all projects.
 exports.index = (req, res, next) => {
@@ -13,7 +16,10 @@ exports.index = (req, res, next) => {
 
 // GET a specific case
 exports.show = (req, res, next) => {
-    res.status(200).json({message: "fooo"});
+    const project = getProjectById(req.params.projectId);
+    project.then((data) => {
+        res.status(200).json(data);
+    })
 };
 
 
