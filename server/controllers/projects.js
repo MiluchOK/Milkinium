@@ -1,10 +1,14 @@
 const Project = require('../models/projects');
-const logger = require('../logger')('cases_controller');
+const logger = require('../logger')('projects_controller');
 
 
-// GET list of all cases.
+// GET list of all projects.
 exports.index = (req, res, next) => {
-    res.status(200).json({message: "fooo"});
+    const projects = Project.find({});
+    projects
+        .then((data) => {
+            res.status(200).json(data);
+        })
 };
 
 // GET a specific case
