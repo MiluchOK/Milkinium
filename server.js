@@ -15,17 +15,8 @@ const stop = (server) => {
 };
 
 const dbConnect = (config) => {
-    //TODO refactor to return a promise
-    mongoose.connect(config.db_host)
-        .then(() => {
-            logger('debug', "Connected to the db.");
-        })
-        .catch((err) => {
-            logger('error', "Error connecting to db: " + err);
-            process.exit();
-        });
-
     mongoose.Promise = require('bluebird');
+    return mongoose.connect(config.db_host);
 };
 
 module.exports = {
