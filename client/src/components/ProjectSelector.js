@@ -7,10 +7,6 @@ import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 
 const styles = theme => ({
-    button: {
-        display: 'block',
-        marginTop: theme.spacing.unit * 2,
-    },
     formControl: {
         margin: theme.spacing.unit,
         minWidth: 120,
