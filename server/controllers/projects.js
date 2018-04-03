@@ -2,12 +2,18 @@ const Project = require('../models/projects');
 const logger = require('../logger')('projects_controller');
 
 const getProjectById = (cazeId) => {
-    return Project.findById(cazeId);
+    return Project
+        .findById(cazeId)
+        .populate('cases')
+        .exec();
 };
 
 // GET list of all projects.
 exports.index = (req, res, next) => {
-    const projects = Project.find({});
+    const projects = Project
+        .find({})
+        .populate('cases')
+        .exec();
     projects
         .then((data) => {
             res.status(200).json(data);

@@ -31,7 +31,7 @@ describe('Cases', function () {
 
         caseData = {
             title: randomName,
-            project_id: '5ac1c7dc7be92c5176b2dad1',
+            project: '5ac1c7dc7be92c5176b2dad1',
             internal_id: randomName
         };
 
@@ -41,7 +41,7 @@ describe('Cases', function () {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res.statusCode).to.equal(201);
-                expect(res.body).to.have.keys(['_id', 'title', '__v', 'project_id', 'internal_id']);
+                expect(res.body).to.have.keys(['_id', 'title', '__v', 'project', 'internal_id']);
                 expect(res.body.title).to.equal(randomName);
                 expect(res.body.internal_id).to.equal(randomName);
                 done();

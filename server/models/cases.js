@@ -11,7 +11,7 @@ const CaseSchema = new Schema({
         required: true,
         unique: true,
     },
-    project_id: {
+    project: {
         type: Schema.Types.ObjectId,
         ref: 'Project',
         required: true

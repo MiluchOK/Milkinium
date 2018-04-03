@@ -58,7 +58,7 @@ describe('Projects', function () {
             })
     });
 
-    it.only('should get individual project', function(done) {
+    it('should get individual project', function(done) {
         const id = '5ac1c7dc7be92c5176b2dad1';
         request(app)
             .get(`/projects/${id}`)
@@ -66,6 +66,8 @@ describe('Projects', function () {
             if(err) done(err);
             expect(res.statusCode).to.equal(200);
             expect(res.body.name).to.equal('c22cc8b5-5a21-4c4e-b094-e2f78e1ff194');
+            expect(res.body.cases).not.to.be.empty;
+            expect(res.body.cases[0].title).to.be.a('string');
             done();
         })
     })

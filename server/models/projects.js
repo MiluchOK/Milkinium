@@ -6,11 +6,17 @@ const ProjectSchema = new Schema({
         type: String,
         required: true
     },
-    cases : [ {
-        type: Schema.Types.ObjectId,
-        ref: 'Case'
-    } ]
+}, {
+        toJSON: { virtuals: true },
+        id: false
 });
+
+ProjectSchema.virtual('cases', {
+  ref: 'Case',
+  localField: '_id',
+  foreignField: 'project'
+});
+
 
 //Exporting our model
 const ProjectModel = mongoose.model('Project', ProjectSchema);
