@@ -82,7 +82,7 @@ class AppBar extends Component {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="title" color="inherit" noWrap className={classes.projectName}>
-                        Milkinium
+                        {this.props.projectSelector}
                     </Typography>
                     <Avatar
                         alt="Adelle Charles"

@@ -1,7 +1,10 @@
-import { Map, List, fromJS } from 'immutable';
+import {Map, List, fromJS} from 'immutable';
 
 export default {
-  projects: List(),
-  users: List(),
-  current_user: Map(),
+    projects: Map({
+        projectsById: {},
+        currentProject: ""
+    }),
+    users: List(),
+    current_user: Map(),
 };

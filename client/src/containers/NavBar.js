@@ -49,6 +49,8 @@ class NavBar extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar
+            projectSelector={this.props.projectSelector}
+            projectName={this.props.projectName}
             open={this.state.open}
             handleDrawerOpen={this.handleDrawerOpen}
             avatarImage={this.props.current_user.get("avatar") || "https://t4.ftcdn.net/jpg/00/78/73/53/240_F_78735333_o3qJe4bT5ciwldLIjVDulFKrDAV3jGYO.jpg"}

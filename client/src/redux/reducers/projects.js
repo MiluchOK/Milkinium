@@ -1,12 +1,16 @@
+import _ from 'lodash';
 import initialState from './initialState';
 import actionTypes from '../actions/actionTypes';
 
 export default function stuff(state = initialState.projects, action) {
-  let newState;
   switch (action.type) {
-    case actionTypes.FETCH_PROJECTS:
-      console.log('FETCH_PROJECTS Action')
-      return action;
+      case actionTypes.GET_PROJECTS_FULFILLED:
+        const h = _.keyBy(action.payload, '_id');
+        state = state.set('projectsById', h);
+        return state;
+      case actionTypes.SELECT_PROJECT:
+        state = state.set('currentProject', action.payload);
+        return state;
     default:
       return state;
   }
