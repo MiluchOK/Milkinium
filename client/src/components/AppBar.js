@@ -10,6 +10,7 @@ import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
 import CornerMenu from './CornerMenu';
+import ProjectSelector from '../containers/ProjectSelector';
 
 const drawerWidth = 240;
 
@@ -82,7 +83,7 @@ class AppBar extends Component {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="title" color="inherit" noWrap className={classes.projectName}>
-                        {this.props.projectSelector}
+                        <ProjectSelector/>
                     </Typography>
                     <Avatar
                         alt="Adelle Charles"
