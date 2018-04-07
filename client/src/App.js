@@ -26,7 +26,7 @@ class App extends Component {
                 <NavBar>
                     <Switch>
                         {NavBarRoutes.map((route) => (
-                            <Route path={route.path} exact component={route.component} />
+                            <Route key={route.path} path={route.path} exact component={route.component} />
                         ))}
                         <Route path="/profile" exact component={Profile}/>
                         {/*TODO Fix 404 rendering with NavBar*/}

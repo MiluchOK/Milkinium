@@ -7,6 +7,7 @@ import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import { Input } from 'material-ui';
 import Select from 'material-ui/Select';
+import CheckBox from '../components/CheckBox';
 
 const styles = theme => ({
     formControl: {
@@ -16,9 +17,24 @@ const styles = theme => ({
 });
 
 
-const renderProjectsCheckbox = (props) => {
-    console.log("THe props: " + Object.keys(props.input));
-    return (<div>FOOOOO</div>)
+const renderProjectsCheckbox = ({ input, label, meta: { touched, error }, children, ...custom }) => {
+    // console.log("THe input is: " + props.foo);
+    const projects = {
+        'dsf3234': {title: 'foop1'},
+        'dsfsd2345': {title: 'goop2'}
+    };
+
+    return (
+        <Select
+            {...input}
+            {...custom}
+        >
+
+            {_.map(projects, (p) => (
+                <MenuItem key={p.title} value={p.title}>{p.title}</MenuItem>
+            ))}
+        </Select>
+    )
 };
 
 
