@@ -19,10 +19,11 @@ class CheckBox extends Component {
         return (
             <Select
                 {...input}
+                {...custom}
             >
 
-                {_.map(this.props.data, (p) => (
-                    <MenuItem key={p.title} value={p.title}>{p.title}</MenuItem>
+                {_.map(custom.data, (p) => (
+                    <MenuItem key={p._id} value={p.name}>{p.name}</MenuItem>
                 ))}
             </Select>
         );

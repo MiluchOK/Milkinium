@@ -45,6 +45,7 @@ function matchDispatchToProps(dispatch){
     }, dispatch)
 }
 
+//TODO remove
 const mapStateToProps = (state) => {
     const pbid = state.projects.get('projectsById');
     const currentProject = state.projects.get('currentProject');
