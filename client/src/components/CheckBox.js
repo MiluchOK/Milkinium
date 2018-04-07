@@ -18,6 +18,7 @@ class CheckBox extends Component {
 
         return (
             <Select
+                style={{backgroundColor: 'white', paddingLeft: 10}}
                 {...input}
                 {...custom}
             >
