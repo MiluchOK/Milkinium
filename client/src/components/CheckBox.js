@@ -17,7 +17,6 @@ class CheckBox extends Component {
         const { input, label, meta: { touched, error }, children, ...custom } = this.props;
         const data = custom.data;
         const first = Object.keys(data)[0];
-        console.log(`FIRST DATA ${first}`);
 
         return (
             <Select
