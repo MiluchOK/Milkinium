@@ -74,6 +74,9 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+
+
+
 const mapStateToProps = (state) => {
   return {current_user: state.current_user}
 };
@@ -83,4 +86,4 @@ export default compose(
     connect(mapStateToProps)
 )(NavBar);
 
-// export default (NavBar);
+

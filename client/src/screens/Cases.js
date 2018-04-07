@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import List from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
+import {bindActionCreators} from 'redux';
 import Grid from 'material-ui/Grid';
+import compose from 'recompose/compose';
 import AddIcon from 'material-ui-icons/Add';
 import Execution from './../components/ExecutionRow';
+import { getCases } from '../redux/actions/casesActions';
 
 const styles = theme => ({
     root: {
@@ -26,6 +29,10 @@ class Cases extends Component {
 
     handleAddCase(){
         console.log("Adding a new case!")
+    }
+
+    componentWillMount(){
+        this.props.getCases()
     }
 
     getCases(){
@@ -61,4 +68,18 @@ class Cases extends Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(Cases);
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({
+        getCases: getCases
+    }, dispatch)
+}
+
+const mapStateToProps = (state) => {
+    return {cases: state.cases}
+};
+
+
+export default compose(
+    withStyles(styles, { withTheme: true }),
+    connect(mapStateToProps, matchDispatchToProps)
+)(Cases);
