@@ -28,20 +28,15 @@ class Cases extends Component {
         console.log("Adding a new case!")
     }
 
+    getCases(){
+        return [{_id: 1}, {_id: 2}]
+    }
+
     render() {
 
         const { classes, theme } = this.props;
 
-        const cases = [
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-        ];
+        const cases = this.getCases();
 
         return (
 
@@ -49,7 +44,7 @@ class Cases extends Component {
                 <div className={classes.root}>
                 <List component="nav">
                     {cases.map((e => (
-                        <Execution />
+                        <Execution key={e._id}/>
                     )))}
                 </List>
 
