@@ -15,16 +15,25 @@ class CheckBox extends Component {
     render() {
 
         const { input, label, meta: { touched, error }, children, ...custom } = this.props;
+        const data = custom.data;
+        const first = Object.keys(data)[0];
+        console.log(`FIRST DATA ${first}`);
 
         return (
             <Select
                 style={{backgroundColor: 'white', paddingLeft: 10}}
-                {...input}
+                name={input.name}
+                onBlur={input.onBlur}
+                onChange={input.onChange}
+                onDragStart={input.onDragStart}
+                onDrop={input.onDrop}
+                onFocus={input.onFocus}
+                value={input.value || first || ""}
                 {...custom}
             >
 
-                {_.map(custom.data, (p) => (
-                    <MenuItem key={p._id} value={p.name}>{p.name}</MenuItem>
+                {_.map(data, (p) => (
+                    <MenuItem key={p._id} value={p._id}>{p.name}</MenuItem>
                 ))}
             </Select>
         );
