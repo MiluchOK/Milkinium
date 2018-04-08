@@ -10,7 +10,6 @@ logger('debug', "In routes.");
 routes.use('/', roots);
 routes.use('/', auth);
 routes.use('/users', users);
-routes.use('/cases', cases);
 routes.use('/projects', projects);
 
 module.exports = routes;

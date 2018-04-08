@@ -10,7 +10,7 @@ let authStub;
 
 describe('Cases', function () {
 
-    beforeEach(function(done){
+    beforeEach(function (done) {
         dbConnect().then((connection) => {
             console.log("Connected to db");
             dbConnection = connection;
@@ -20,23 +20,24 @@ describe('Cases', function () {
         });
     });
 
-    afterEach(function(done){
+    afterEach(function (done) {
         dbConnection.disconnect();
         authStub.restore();
         done();
     });
 
-    it('should create a case', function(done){
+    it('should create a case', function (done) {
         const randomName = uuidv4();
+        const project = '5ac1c7dc7be92c5176b2dad1';
 
         caseData = {
             title: randomName,
-            project: '5ac1c7dc7be92c5176b2dad1',
+            project: project,
             internal_id: randomName
         };
 
         request(app)
-            .post('/cases')
+            .post(`/projects/${project}/cases`)
             .send(caseData)
             .end((err, res) => {
                 if (err) done(err);
@@ -45,7 +46,20 @@ describe('Cases', function () {
                 expect(res.body.title).to.equal(randomName);
                 expect(res.body.internal_id).to.equal(randomName);
                 done();
-        })
+            })
+    });
+
+    it.only('should get cases for a project', function (done) {
+        const randomName = uuidv4();
+        const project = '5ac1c7dc7be92c5176b2dad1';
+
+        request(app)
+            .get(`/projects/${project}/cases`)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.statusCode).to.equal(200);
+                done();
+            })
     })
 
 
