@@ -13,6 +13,7 @@ import Execution from './../components/ExecutionRow';
 import {getCases} from '../redux/actions/casesActions';
 import InboxIcon from 'material-ui-icons/Inbox';
 import NoResults from '../components/NoResults';
+import Creator from '../containers/Creator';
 
 const styles = theme => ({
     root: {
@@ -30,12 +31,26 @@ const styles = theme => ({
 
 class Cases extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            creatorOpen: false,
+        };
+
+        this.handleAddCase = this.handleAddCase.bind(this);
+    }
+
     handleAddCase() {
-        console.log("Adding a new case!")
+        console.log("Adding a new case!");
+        this.setState({creatorOpen: true})
     }
 
     fetchCases(){
-        this.props.getCases(this.props.currentProject);
+        //TODO Not sure if it is any good
+        if(this.props.currentProject){
+            this.props.getCases(this.props.currentProject);
+        }
     }
 
     componentDidMount() {
@@ -70,7 +85,14 @@ class Cases extends Component {
 
         return (
 
-            <Grid style={{flex: 1}}>
+            <div>
+                <Creator
+                    open={this.state.creatorOpen}
+                    title={'New Case'}
+                    handleClose={() => {this.setState({creatorOpen: false})}}
+                    handleSubmit={(data) => {console.log(`Saving a new case: ${data}`)}}
+                />
+
                 <div className={classes.root}>
                     <List component="nav">
                         {this.renderCases()}
@@ -84,7 +106,7 @@ class Cases extends Component {
                         <AddIcon />
                     </Button>
                 </div>
-            </Grid>
+            </div>
         );
     }
 }
