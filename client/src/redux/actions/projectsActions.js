@@ -2,7 +2,6 @@ import actionTypes from './actionTypes';
 import httpClient from '../../clients/httpClient';
 
 export const selectProject = (projectId) => {
-    console.log("SELECTING A PROJECT");
     return {
         type: actionTypes.SELECT_PROJECT,
         payload: projectId

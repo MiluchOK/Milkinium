@@ -26,7 +26,6 @@ class AuthClient {
       let base64Url = token.split('.')[1];
       let base64 = base64Url.replace('-', '+').replace('_', '/');
       const data =  JSON.parse(window.atob(base64));
-      console.log("Got token data: " + Object.keys(data.data));
       return data.data;
       // return {
       //   name: {

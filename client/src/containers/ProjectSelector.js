@@ -21,7 +21,6 @@ class ProjectSelector extends Component {
 
     render() {
 
-        //TODO Get from redux
         const projects = this.props.allProjects;
 
         return (

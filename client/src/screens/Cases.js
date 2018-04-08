@@ -34,9 +34,18 @@ class Cases extends Component {
         console.log("Adding a new case!")
     }
 
-    componentWillMount() {
-        const projectId = this.props.currentProject;
-        this.props.getCases(projectId);
+    fetchCases(){
+        this.props.getCases(this.props.currentProject);
+    }
+
+    componentDidMount() {
+        this.fetchCases()
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.currentProject != this.props.currentProject){
+            this.fetchCases();
+        }
     }
 
     renderCases() {
@@ -53,13 +62,10 @@ class Cases extends Component {
                 key={c._id}
             />
         )));
-        console.log(elements.class);
-        console.log(`First element is ${elements[0]}`);
         return elements;
     }
 
     render() {
-
         const {classes, theme} = this.props;
 
         return (
@@ -90,11 +96,9 @@ function matchDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state) => {
-    const cases = state.cases.get('casesById');
-    const currentProject = state.projects.currentProject;
     return {
-        cases: cases,
-        currentProject: currentProject
+        cases: state.cases.get('casesById'),
+        currentProject: state.projects.get('currentProject')
     }
 };
 
