@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import List from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
@@ -10,6 +11,7 @@ import compose from 'recompose/compose';
 import AddIcon from 'material-ui-icons/Add';
 import Execution from './../components/ExecutionRow';
 import { getCases } from '../redux/actions/casesActions';
+import NoResults from '../components/NoResults';
 
 const styles = theme => ({
     root: {
@@ -32,27 +34,26 @@ class Cases extends Component {
     }
 
     componentWillMount(){
-        this.props.getCases()
+        this.props.getCases();
     }
 
-    getCases(){
-        return [{_id: 1}, {_id: 2}]
+    renderCases(){
+        const cases = this.props.cases || {};
+        const res = _.mapValues(cases, (c => (
+            <Execution key={c._id}/>
+        )))
     }
 
     render() {
 
         const { classes, theme } = this.props;
 
-        const cases = this.getCases();
-
         return (
 
             <Grid style={{flex: 1}}>
                 <div className={classes.root}>
                 <List component="nav">
-                    {cases.map((e => (
-                        <Execution key={e._id}/>
-                    )))}
+                    {this.renderCases() || <NoResults />}
                 </List>
 
                 <Button variant="fab"
@@ -75,7 +76,9 @@ function matchDispatchToProps(dispatch){
 }
 
 const mapStateToProps = (state) => {
-    return {cases: state.cases}
+    const cases = state.cases.get('casesById');
+    console.log(`The cases from store are: ${Object.keys(cases)}`);
+    return {cases: cases}
 };
 
 
