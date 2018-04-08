@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import InboxIcon from 'material-ui-icons/Inbox';
 
 class ExecutionRow extends Component {
 
@@ -8,9 +7,9 @@ class ExecutionRow extends Component {
     return (
         <ListItem button>
           <ListItemIcon>
-            <InboxIcon />
+              {this.props.icon}
           </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <ListItemText primary={this.props.title} />
         </ListItem>
     );
   }
