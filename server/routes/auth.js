@@ -1,5 +1,5 @@
 const routes = require('express').Router();
-const validate = require('express-validation')
+const validate = require('express-validation');
 const logger = require('../logger')('auth_route');
 const authController = require('../controllers/auth');
 const authValidator = require('../validators/auth');
