@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -16,6 +17,21 @@ ProjectSchema.virtual('cases', {
   localField: '_id',
   foreignField: 'project'
 });
+
+ProjectSchema.statics.findWithCases = function(id){
+    const self = this;
+    return new Promise(function(resolve, reject){
+        self.findById(id)
+            .populate('cases')
+            .exec()
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+    })
+};
 
 
 //Exporting our model

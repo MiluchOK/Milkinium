@@ -1,14 +1,34 @@
+const Promise = require('bluebird');
 const Case = require('../models/cases');
+const Project = require('../models/projects');
 const logger = require('../logger')('cases_controller');
 
 const getCazeById = (cazeId) => {
     return Case.findById(cazeId);
 };
 
+const getCasesForAProject = (projectId) => {
+    return new Promise(function(resolve, reject){
+        logger('debug', `Fetching the project data`);
+        Project.findWithCases(projectId)
+            .then((data) => {
+                logger('debug', `Got project data.`);
+                resolve(data.cases);
+            })
+            .catch((err) => {
+                logger('error', `Could not fetch project data.`);
+                reject(err);
+            })
+    })
+};
+
 // GET list of all cases.
 exports.index = (req, res, next) => {
     logger('info', 'Getting cases.');
-    const cases = Case.find({});
+    const projectId = req.params.projectId;
+    logger('debug', 'Got project id: ' + projectId);
+    const cases = getCasesForAProject(projectId);
+
     cases
         .then((data) => {
             res.status(200).json(data);

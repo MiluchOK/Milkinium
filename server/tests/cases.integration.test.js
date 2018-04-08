@@ -49,7 +49,7 @@ describe('Cases', function () {
             })
     });
 
-    it.only('should get cases for a project', function (done) {
+    it.only('should get cases for the project', function (done) {
         const randomName = uuidv4();
         const project = '5ac1c7dc7be92c5176b2dad1';
 
@@ -58,6 +58,7 @@ describe('Cases', function () {
             .end((err, res) => {
                 if (err) done(err);
                 expect(res.statusCode).to.equal(200);
+                expect(res.body.length).to.equal(7);
                 done();
             })
     })
