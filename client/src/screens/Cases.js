@@ -35,7 +35,8 @@ class Cases extends Component {
     }
 
     componentWillMount() {
-        this.props.getCases();
+        const projectId = this.props.currentProject;
+        this.props.getCases(projectId);
     }
 
     renderCases() {
@@ -90,7 +91,11 @@ function matchDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     const cases = state.cases.get('casesById');
-    return {cases: cases}
+    const currentProject = state.projects.currentProject;
+    return {
+        cases: cases,
+        currentProject: currentProject
+    }
 };
 
 

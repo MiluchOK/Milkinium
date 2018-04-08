@@ -5,8 +5,10 @@ import {withStyles} from 'material-ui/styles';
 import {InputLabel} from 'material-ui/Input';
 import {MenuItem} from 'material-ui/Menu';
 import {FormControl} from 'material-ui/Form';
+import {bindActionCreators} from 'redux';
 import {Input} from 'material-ui';
 import CheckBox from '../components/CheckBox';
+import { selectProject } from '../redux/actions/projectsActions'
 
 const styles = theme => ({
     formControl: {
@@ -30,6 +32,7 @@ class ProjectSelector extends Component {
                     component={CheckBox}
                     data={projects}
                     label="Projects"
+                    onChange={(e, newValue) => {this.props.selectProject(newValue)}}
                     type="string"
                     margin="none"
                 />
@@ -50,5 +53,11 @@ const mapStateToProps = (state) => {
     }
 };
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        selectProject: selectProject
+    }, dispatch)
+}
+
 ProjectSelector = withStyles(styles)(ProjectSelector);
-export default connect(mapStateToProps)(ProjectSelector);
+export default connect(mapStateToProps, matchDispatchToProps)(ProjectSelector);
