@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 const chai = require('chai');
 const expect = chai.expect;
 
-const dbConnect = require('../db').dbConnect;
+const dbConnect = require('../../db').dbConnect;
 let dbConnection;
 let app;
 let authStub;
@@ -14,8 +14,8 @@ describe('Cases', function () {
         dbConnect().then((connection) => {
             console.log("Connected to db");
             dbConnection = connection;
-            authStub = require('./stubs/auth').stubAuth();
-            app = require('../app');
+            authStub = require('../stubs/auth').stubAuth();
+            app = require('../../app');
             done();
         });
     });
