@@ -7,6 +7,7 @@ import Grid from 'material-ui/Grid';
 import Dialog from 'material-ui/Dialog';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Slide from 'material-ui/transitions/Slide';
+import NewTestCaseForm from '../components/NewTestCaseForm';
 
 
 const styles = theme => ({
@@ -39,9 +40,11 @@ class Creator extends Component {
                     onClose={this.props.handleClose}
                     transition={Transition}
                 >
-                    <div>Starting from scratch this time.</div>
-                    <Button onClick={this.props.handleSubmit} type="primary">Save</Button>
-                    <Button onClick={this.props.handleClose}>Close the shit</Button>
+                    <div>Create a new test case.</div>
+                    <NewTestCaseForm onSubmit={this.props.handleSubmit}>
+                        <Button type="submit" color="primary">Save</Button>
+                        <Button onClick={this.props.handleClose}>Close the shit</Button>
+                    </NewTestCaseForm>
                 </Dialog>
             </div>
         )

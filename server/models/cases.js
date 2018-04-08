@@ -5,16 +5,6 @@ const CaseSchema = new Schema({
     title: {
         type: String,
         required: true
-    },
-    internal_id: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    project: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project',
-        required: true
     }
 });
 

@@ -13,7 +13,9 @@ class Button extends Component {
             <MIButton
                 onClick={this.props.onClick}
                 variant="raised"
-                color={this.props.type}>
+                color={this.props.color}
+                type={this.props.type}
+            >
                 {this.props.children}
             </MIButton>
         )

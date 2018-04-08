@@ -10,7 +10,7 @@ import Grid from 'material-ui/Grid';
 import compose from 'recompose/compose';
 import AddIcon from 'material-ui-icons/Add';
 import Execution from './../components/ExecutionRow';
-import {getCases} from '../redux/actions/casesActions';
+import {getCases, createCase} from '../redux/actions/casesActions';
 import InboxIcon from 'material-ui-icons/Inbox';
 import NoResults from '../components/NoResults';
 import Creator from '../containers/Creator';
@@ -63,6 +63,11 @@ class Cases extends Component {
         }
     }
 
+    handleNewCaseCreation(data){
+        const projectId = this.props.currentProject;
+        this.props.createCase(projectId, data);
+    }
+
     renderCases() {
         const cases = this.props.cases;
 
@@ -90,7 +95,7 @@ class Cases extends Component {
                     open={this.state.creatorOpen}
                     title={'New Case'}
                     handleClose={() => {this.setState({creatorOpen: false})}}
-                    handleSubmit={(data) => {console.log(`Saving a new case: ${data}`)}}
+                    handleSubmit={(data) => {this.handleNewCaseCreation(data)}}
                 />
 
                 <div className={classes.root}>
@@ -113,7 +118,8 @@ class Cases extends Component {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getCases: getCases
+        getCases: getCases,
+        createCase: createCase
     }, dispatch)
 }
 
