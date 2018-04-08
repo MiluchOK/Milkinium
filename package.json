@@ -6,7 +6,7 @@
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "test": "JWT_SECRET=foo NODE_ENV=test mocha server/tests"
+    "test": "JWT_SECRET=foo NODE_ENV=test jest server/tests"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -18,10 +18,10 @@
     "express-jwt": "^5.3.1",
     "express-validation": "^1.0.2",
     "immutable": "^3.8.2",
+    "jest": "^22.4.3",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
     "log4js": "^2.5.3",
-    "mocha": "5.0.5",
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
