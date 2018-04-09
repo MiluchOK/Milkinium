@@ -16,7 +16,7 @@ const renderTextField = ({
     {...input}
     {...custom}
   />
-)
+);
 
 
 let LoginForm = props => {
