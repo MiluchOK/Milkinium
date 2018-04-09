@@ -39,6 +39,7 @@ class Cases extends Component {
         };
 
         this.handleAddCase = this.handleAddCase.bind(this);
+        this.handleNewCaseCreation = this.handleNewCaseCreation.bind(this);
     }
 
     handleAddCase() {
@@ -58,6 +59,7 @@ class Cases extends Component {
     }
 
     componentDidUpdate(prevProps){
+        console.log(prevProps);
         if(prevProps.currentProject != this.props.currentProject){
             this.fetchCases();
         }
@@ -65,7 +67,12 @@ class Cases extends Component {
 
     handleNewCaseCreation(data){
         const projectId = this.props.currentProject;
-        this.props.createCase(projectId, data);
+        this.props.createCase(projectId, data)
+            .then((data) => {
+                console.log(`Case created: ${data}`);
+                this.fetchCases();
+                this.setState({creatorOpen: false})
+            })
     }
 
     renderCases() {
@@ -87,7 +94,7 @@ class Cases extends Component {
 
     render() {
         const {classes, theme} = this.props;
-
+        console.log("RERENDERING");
         return (
 
             <div>
