@@ -5,6 +5,11 @@ const CaseSchema = new Schema({
     title: {
         type: String,
         required: true
+    },
+    project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project',
+        required: true
     }
 });
 
