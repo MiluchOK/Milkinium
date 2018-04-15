@@ -84,5 +84,13 @@ exports.update = (req, res, next) => {
 
 exports.destroy = (req, res, next) => {
     logger('info', 'Deleting a case.');
-    res.status(404).json({message: "Not implemented"});
+    const id = req.params.caseId;
+    Case.findByIdAndRemove(id)
+        .then((data) => {
+            logger('info', `Deleted case successfully. Object: ${data}`);
+            res.status(200).json({message: 'ok'})
+        })
+        .catch((err) => {
+            next(err)
+        })
 };

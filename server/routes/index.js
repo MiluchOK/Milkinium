@@ -14,8 +14,8 @@ routes.use('/', roots);
 routes.use('/', auth);
 routes.use('/users', users);
 routes.use('/projects', projects);
-routes.get('/:caseId', validate(caseValidator.getCase), casesController.show);
-routes.put('/:caseId', casesController.update);
-routes.delete('/:caseId', casesController.destroy);
+routes.get('/cases/:caseId', validate(caseValidator.getCase), casesController.show);
+routes.put('/cases/:caseId', casesController.update);
+routes.delete('/cases/:caseId', casesController.destroy);
 
 module.exports = routes;

@@ -9,8 +9,8 @@ import {bindActionCreators} from 'redux';
 import Grid from 'material-ui/Grid';
 import compose from 'recompose/compose';
 import AddIcon from 'material-ui-icons/Add';
-import Execution from './../components/ExecutionRow';
-import {getCases, createCase} from '../redux/actions/casesActions';
+import Case from './../components/ExecutionRow';
+import {getCases, createCase, deleteCase} from '../redux/actions/casesActions';
 import InboxIcon from 'material-ui-icons/Inbox';
 import NoResults from '../components/NoResults';
 import Creator from '../containers/Creator';
@@ -75,6 +75,14 @@ class Cases extends Component {
             })
     }
 
+    handleCaseDeletion(caseId){
+        this.props.deleteCase(caseId)
+            .then((data) => {
+                console.log(`Case ${data} deleted`);
+                this.fetchCases();
+            })
+    }
+
     renderCases() {
         const cases = this.props.cases;
 
@@ -83,10 +91,12 @@ class Cases extends Component {
         }
 
         const elements = _.map(cases, (c => (
-            <Execution
+            <Case
                 title={c.title}
                 icon={<InboxIcon />}
                 key={c._id}
+                itemId={c._id}
+                handleDelete={() => {this.handleCaseDeletion(c._id)}}
             />
         )));
         return elements;
@@ -125,7 +135,8 @@ class Cases extends Component {
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getCases: getCases,
-        createCase: createCase
+        createCase: createCase,
+        deleteCase: deleteCase,
     }, dispatch)
 }
 
