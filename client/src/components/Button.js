@@ -12,7 +12,7 @@ class Button extends Component {
         return (
             <MIButton
                 onClick={this.props.onClick}
-                variant="raised"
+                variant={this.props.variant}
                 color={this.props.color}
                 type={this.props.type}
             >

@@ -34,7 +34,7 @@ let LoginForm = props => {
               component={renderTextField}
               type="password" />
           </div>
-          <Button type="submit">Submit</Button>
+          <Button variant="raised" color="primary" type="submit">Sign In</Button>
       </form>
     )
 };
