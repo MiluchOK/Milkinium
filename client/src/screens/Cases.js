@@ -18,7 +18,7 @@ import Creator from '../containers/Creator';
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
-        position: 'relative',
+        flexGrow: 1,
     },
 
     fab: {
@@ -94,10 +94,9 @@ class Cases extends Component {
 
     render() {
         const {classes, theme} = this.props;
-        console.log("RERENDERING");
         return (
 
-            <div>
+            <div className={classes.root}>
                 <Creator
                     open={this.state.creatorOpen}
                     title={'New Case'}
@@ -105,7 +104,7 @@ class Cases extends Component {
                     handleSubmit={(data) => {this.handleNewCaseCreation(data)}}
                 />
 
-                <div className={classes.root}>
+                <div>
                     <List component="nav">
                         {this.renderCases()}
                     </List>
