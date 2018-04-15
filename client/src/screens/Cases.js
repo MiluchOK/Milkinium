@@ -3,15 +3,15 @@ import {Switch, Route} from 'react-router-dom';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import List from 'material-ui/List';
+import { Link } from 'react-router-dom';
 import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import {bindActionCreators} from 'redux';
-import Grid from 'material-ui/Grid';
 import compose from 'recompose/compose';
 import AddIcon from 'material-ui-icons/Add';
 import Case from './../components/ExecutionRow';
 import {getCases, createCase, deleteCase} from '../redux/actions/casesActions';
-import InboxIcon from 'material-ui-icons/Inbox';
+import DescriptionIcon from 'material-ui-icons/Description';
 import NoResults from '../components/NoResults';
 import Creator from '../containers/Creator';
 
@@ -91,13 +91,14 @@ class Cases extends Component {
         }
 
         const elements = _.map(cases, (c => (
-            <Case
-                title={c.title}
-                icon={<InboxIcon />}
-                key={c._id}
-                itemId={c._id}
-                handleDelete={() => {this.handleCaseDeletion(c._id)}}
-            />
+            <Link style={{ textDecoration: 'none' }} to={`/cases/${c._id}`}>
+                <Case
+                    title={c.title}
+                    icon={<DescriptionIcon />}
+                    key={c._id}
+                    handleDelete={() => {this.handleCaseDeletion(c._id)}}
+                />
+            </Link>
         )));
         return elements;
     }
@@ -107,6 +108,7 @@ class Cases extends Component {
         return (
 
             <div className={classes.root}>
+
                 <Creator
                     open={this.state.creatorOpen}
                     title={'New Case'}
